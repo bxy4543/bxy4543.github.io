@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="集群镜像插件使用插件类型列表主机名插件主机名插件将帮助您更改所有主机名 123456789101112131415---apiVersion: sealer.aliyun.com&#x2F;v1alpha1kind: Pluginmetadata:  name: MyHostname # 指定插件名称，将会转储到$rootfs&#x2F;plugins目录下。spec:  type: HOSTNAME #插件类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/03/29/zh/getting-started/plugin/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="集群镜像插件使用插件类型列表主机名插件主机名插件将帮助您更改所有主机名 123456789101112131415---apiVersion: sealer.aliyun.com&#x2F;v1alpha1kind: Pluginmetadata:  name: MyHostname # 指定插件名称，将会转储到$rootfs&#x2F;plugins目录下。spec:  type: HOSTNAME #插件类型">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-29T02:45:03.899Z">
+<meta property="article:modified_time" content="2022-03-29T02:45:03.899Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-zh/getting-started/plugin" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/29/zh/getting-started/plugin/" class="article-date">
+  <time class="dt-published" datetime="2022-03-29T02:45:03.899Z" itemprop="datePublished">2022-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="集群镜像插件使用"><a href="#集群镜像插件使用" class="headerlink" title="集群镜像插件使用"></a>集群镜像插件使用</h1><h2 id="插件类型列表"><a href="#插件类型列表" class="headerlink" title="插件类型列表"></a>插件类型列表</h2><h3 id="主机名插件"><a href="#主机名插件" class="headerlink" title="主机名插件"></a>主机名插件</h3><p>主机名插件将帮助您更改所有主机名</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyHostname</span> <span class="comment"># 指定插件名称，将会转储到$rootfs/plugins目录下。</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">HOSTNAME</span> <span class="comment">#插件类型</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PreInit</span> <span class="comment"># 指定运行阶段</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    192.168.0.2 master-0</span></span><br><span class="line"><span class="string">    192.168.0.3 master-1</span></span><br><span class="line"><span class="string">    192.168.0.4 master-2</span></span><br><span class="line"><span class="string">    192.168.0.5 node-0</span></span><br><span class="line"><span class="string">    192.168.0.6 node-1</span></span><br><span class="line"><span class="string">    192.168.0.7 node-2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="脚本插件"><a href="#脚本插件" class="headerlink" title="脚本插件"></a>脚本插件</h3><p>你可以在指定节点的任何阶段执行任何shell命令。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyShell</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">SHELL</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span> <span class="comment"># # 指定运行阶段【PreInit ｜ PreInstall ｜ PostInstall ｜ PostClean】</span></span><br><span class="line">  <span class="attr">on:</span> <span class="string">node-role.kubernetes.io/master=</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line">    <span class="string">kubectl</span> <span class="string">get</span> <span class="string">nodes</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">action : [PreInit| PreInstall| PostInstall] # 指定执行shell的时机</span><br><span class="line">  镜像挂载前阶段          |   action: Originally</span><br><span class="line">  在初始化之前之前执行命令  |  action: PreInit</span><br><span class="line">  在添加节点之前执行命令    |  action: PreJoin</span><br><span class="line">  在添加节点之后执行命令    |  action: PostJoin</span><br><span class="line">  在安装集群之前执行命令    |  action: PreInstall</span><br><span class="line">  在安装集群之后执行命令    |  action: PostInstall</span><br><span class="line">  在清理集群后执行命令      |  action: PostClean</span><br><span class="line">  组合使用                | action: PreInit|PreJoin</span><br><span class="line">on     : #指定执行命令的机器</span><br><span class="line">  为空时默认在所有节点执行</span><br><span class="line">  在所有master节点上执行  on: master</span><br><span class="line">  在所有node节点上执行    on: node</span><br><span class="line">  在指定IP上执行         on: 192.168.56.113,192.168.56.114,192.168.56.115,192.168.56.116</span><br><span class="line">  在有连续IP的机器上执行   on: 192.168.56.113-192.168.56.116</span><br><span class="line">  在指定label节点上执行(action需设置为PostInstall)    on: node-role.kubernetes.io/master=</span><br><span class="line">data   : #指定执行的shell命令</span><br></pre></td></tr></table></figure>
+
+<h3 id="标签插件"><a href="#标签插件" class="headerlink" title="标签插件"></a>标签插件</h3><p>帮助您在安装kubernetes集群后设置标签</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyLabel</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LABEL</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    192.168.0.2 ssd=true</span></span><br><span class="line"><span class="string">    192.168.0.3 ssd=true</span></span><br><span class="line"><span class="string">    192.168.0.4 ssd=true</span></span><br><span class="line"><span class="string">    192.168.0.5 ssd=false,hdd=true</span></span><br><span class="line"><span class="string">    192.168.0.6 ssd=false,hdd=true</span></span><br><span class="line"><span class="string">    192.168.0.7 ssd=false,hdd=true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="集群检测插件"><a href="#集群检测插件" class="headerlink" title="集群检测插件"></a>集群检测插件</h3><p>由于服务器以及环境因素(服务器磁盘性能差)可能会导致sealer安装完kubernetes集群后，立即部署应用服务，出现部署失败的情况。cluster check插件会等待kubernetes集群稳定后再部署应用服务。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">checkCluster</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">CLUSTERCHECK</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PreGuest</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="污点插件"><a href="#污点插件" class="headerlink" title="污点插件"></a>污点插件</h3><p>如果你在Clusterfile后添加taint插件配置并应用它，sealer将帮助你添加污点和去污点：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">taint</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">Taint</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PreGuest</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    192.168.56.3 key1=value1:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.4 key2=value2:NoSchedule-</span></span><br><span class="line"><span class="string">    192.168.56.3-192.168.56.7 key3:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.3,192.168.56.4,192.168.56.5,192.168.56.6,192.168.56.7 key4:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.3 key5=:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.3 key6:NoSchedule-</span></span><br><span class="line"><span class="string">    192.168.56.4 key7:NoSchedule-</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>data写法为<code>ips taint_argument</code><br>ips           : 多个ip通过<code>,</code>连接，连续ip写法为 首ip-末尾ip<br>taint_argument: 同kubernetes 添加或去污点写法(key&#x3D;value:effect #effect必须为：NoSchedule, PreferNoSchedule 或 NoExecute)。</p>
+</blockquote>
+<h3 id="Etcd-备份插件"><a href="#Etcd-备份插件" class="headerlink" title="Etcd 备份插件"></a>Etcd 备份插件</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyBackup</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ETCD</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Out-of-tree-plugin"><a href="#Out-of-tree-plugin" class="headerlink" title="Out of tree plugin"></a>Out of tree plugin</h3><p>at present, we only support the golang so file as out of tree plugin. More description about golang plugin<br>see <a target="_blank" rel="noopener" href="https://pkg.go.dev/plugin">golang plugin website</a>.</p>
+<p>copy the so file and the plugin config to your cloud image at build stage use <code>Kubefile</code>,sealer will parse and execute<br>it. develop your own out of tree plugin see <a href="../advanced/develop-plugin.md">sealer plugin</a>.</p>
+<p>plugin config:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">label_nodes.so</span> <span class="comment"># out of tree plugin name</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LABEL_TEST_SO</span> <span class="comment"># define your own plugin type.</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span> <span class="comment"># which stage will this plugin be applied.</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line">    <span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span> <span class="string">ssd=true</span></span><br></pre></td></tr></table></figure>
+
+<p>Kubefile:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY label_nodes.so plugin</span><br><span class="line">COPY label_nodes.yaml plugin</span><br></pre></td></tr></table></figure>
+
+<p>Build a cluster image that contains the golang plugin (or more plugins):</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -m lite -t kubernetes-post-install:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何使用插件"><a href="#如何使用插件" class="headerlink" title="如何使用插件"></a>如何使用插件</h2><h3 id="通过Clusterfile使用插件"><a href="#通过Clusterfile使用插件" class="headerlink" title="通过Clusterfile使用插件"></a>通过Clusterfile使用插件</h3><p>例如，在安装kubernetes集群后设置节点标签:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.cloud/v2</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Cluster</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">default-kubernetes-cluster</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">kubernetes:v1.19.8</span></span><br><span class="line">  <span class="attr">ssh:</span></span><br><span class="line">    <span class="attr">passwd:</span> <span class="string">xxx</span></span><br><span class="line">  <span class="attr">hosts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">ips:</span> [ <span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.3</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.4</span> ]</span><br><span class="line">      <span class="attr">roles:</span> [ <span class="string">master</span> ]</span><br><span class="line">    <span class="bullet">-</span> <span class="attr">ips:</span> [ <span class="number">192.168</span><span class="number">.0</span><span class="number">.5</span> ]</span><br><span class="line">      <span class="attr">roles:</span> [ <span class="string">node</span> ]</span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">LABEL</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LABEL</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line">    <span class="number">172.20</span><span class="number">.126</span><span class="number">.8</span> <span class="string">ssd=false,hdd=true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer apply -f Clusterfile</span><br></pre></td></tr></table></figure>
+
+<h3 id="在Kubefile中使用默认插件"><a href="#在Kubefile中使用默认插件" class="headerlink" title="在Kubefile中使用默认插件"></a>在Kubefile中使用默认插件</h3><p>在很多情况下，可以不使用Clusterfile而使用插件，本质上是在使用插件之前存储了Clusterfile插件到$rootfs&#x2F;plugins目录下 所以当我们构建镜像时可以添加自定义默认插件。</p>
+<p>插件配置文件 shell.yaml:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">taint</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">SHELL</span></span><br><span class="line"><span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line"><span class="attr">on:</span> <span class="string">node-role.kubernetes.io/master=</span></span><br><span class="line"><span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">  kubectl get nodes</span></span><br><span class="line"><span class="string"></span><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">SHELL</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    if type yum &gt;/dev/null 2&gt;&amp;1;then</span></span><br><span class="line"><span class="string">    yum -y install iscsi-initiator-utils</span></span><br><span class="line"><span class="string">    systemctl enable iscsid</span></span><br><span class="line"><span class="string">    systemctl start iscsid</span></span><br><span class="line"><span class="string">    elif type apt-get &gt;/dev/null 2&gt;&amp;1;then</span></span><br><span class="line"><span class="string">    apt-get update</span></span><br><span class="line"><span class="string">    apt-get -y install open-iscsi</span></span><br><span class="line"><span class="string">    systemctl enable iscsid</span></span><br><span class="line"><span class="string">    systemctl start iscsid</span></span><br><span class="line"><span class="string">    fi</span></span><br></pre></td></tr></table></figure>
+
+<p>Kubefile:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY shell.yaml plugin</span><br></pre></td></tr></table></figure>
+
+<p>构建一个包含安装iscsi的插件(或更多插件)的集群镜像:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -m lite -t kubernetes-iscsi:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+<p>通过镜像启动集群后插件也将被执行，而无需在Clusterfile中定义插件:<br><code>sealer run kubernetes-iscsi:v1.19.8 -m x.x.x.x -p xxx</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/29/zh/getting-started/plugin/" data-id="cl1fryzyc000i26e2g2mo2rpo" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/31/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/23/zh/getting-started/quick-start/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/01/blog/">blog</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/29/zh/getting-started/plugin/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/zh/getting-started/quick-start/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/zh/getting-started/introduction/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

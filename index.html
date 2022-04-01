@@ -71,6 +71,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/01/blog/" class="article-date">
+  <time class="dt-published" datetime="2022-04-01T01:32:48.000Z" itemprop="datePublished">2022-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/01/blog/">blog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/01/blog/" data-id="cl1fryzx7000026e2hux80y04" data-title="blog" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/03/31/hello-world/" class="article-date">
@@ -110,7 +148,466 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/03/31/hello-world/" data-id="cl1evtrzg00002ae2gwsx2k05" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/03/31/hello-world/" data-id="cl1fryzxu000126e2csdwc673" data-title="Hello World" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/getting-started/plugin" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/29/zh/getting-started/plugin/" class="article-date">
+  <time class="dt-published" datetime="2022-03-29T02:45:03.899Z" itemprop="datePublished">2022-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="集群镜像插件使用"><a href="#集群镜像插件使用" class="headerlink" title="集群镜像插件使用"></a>集群镜像插件使用</h1><h2 id="插件类型列表"><a href="#插件类型列表" class="headerlink" title="插件类型列表"></a>插件类型列表</h2><h3 id="主机名插件"><a href="#主机名插件" class="headerlink" title="主机名插件"></a>主机名插件</h3><p>主机名插件将帮助您更改所有主机名</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyHostname</span> <span class="comment"># 指定插件名称，将会转储到$rootfs/plugins目录下。</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">HOSTNAME</span> <span class="comment">#插件类型</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PreInit</span> <span class="comment"># 指定运行阶段</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    192.168.0.2 master-0</span></span><br><span class="line"><span class="string">    192.168.0.3 master-1</span></span><br><span class="line"><span class="string">    192.168.0.4 master-2</span></span><br><span class="line"><span class="string">    192.168.0.5 node-0</span></span><br><span class="line"><span class="string">    192.168.0.6 node-1</span></span><br><span class="line"><span class="string">    192.168.0.7 node-2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="脚本插件"><a href="#脚本插件" class="headerlink" title="脚本插件"></a>脚本插件</h3><p>你可以在指定节点的任何阶段执行任何shell命令。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyShell</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">SHELL</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span> <span class="comment"># # 指定运行阶段【PreInit ｜ PreInstall ｜ PostInstall ｜ PostClean】</span></span><br><span class="line">  <span class="attr">on:</span> <span class="string">node-role.kubernetes.io/master=</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line">    <span class="string">kubectl</span> <span class="string">get</span> <span class="string">nodes</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">action : [PreInit| PreInstall| PostInstall] # 指定执行shell的时机</span><br><span class="line">  镜像挂载前阶段          |   action: Originally</span><br><span class="line">  在初始化之前之前执行命令  |  action: PreInit</span><br><span class="line">  在添加节点之前执行命令    |  action: PreJoin</span><br><span class="line">  在添加节点之后执行命令    |  action: PostJoin</span><br><span class="line">  在安装集群之前执行命令    |  action: PreInstall</span><br><span class="line">  在安装集群之后执行命令    |  action: PostInstall</span><br><span class="line">  在清理集群后执行命令      |  action: PostClean</span><br><span class="line">  组合使用                | action: PreInit|PreJoin</span><br><span class="line">on     : #指定执行命令的机器</span><br><span class="line">  为空时默认在所有节点执行</span><br><span class="line">  在所有master节点上执行  on: master</span><br><span class="line">  在所有node节点上执行    on: node</span><br><span class="line">  在指定IP上执行         on: 192.168.56.113,192.168.56.114,192.168.56.115,192.168.56.116</span><br><span class="line">  在有连续IP的机器上执行   on: 192.168.56.113-192.168.56.116</span><br><span class="line">  在指定label节点上执行(action需设置为PostInstall)    on: node-role.kubernetes.io/master=</span><br><span class="line">data   : #指定执行的shell命令</span><br></pre></td></tr></table></figure>
+
+<h3 id="标签插件"><a href="#标签插件" class="headerlink" title="标签插件"></a>标签插件</h3><p>帮助您在安装kubernetes集群后设置标签</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyLabel</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LABEL</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    192.168.0.2 ssd=true</span></span><br><span class="line"><span class="string">    192.168.0.3 ssd=true</span></span><br><span class="line"><span class="string">    192.168.0.4 ssd=true</span></span><br><span class="line"><span class="string">    192.168.0.5 ssd=false,hdd=true</span></span><br><span class="line"><span class="string">    192.168.0.6 ssd=false,hdd=true</span></span><br><span class="line"><span class="string">    192.168.0.7 ssd=false,hdd=true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="集群检测插件"><a href="#集群检测插件" class="headerlink" title="集群检测插件"></a>集群检测插件</h3><p>由于服务器以及环境因素(服务器磁盘性能差)可能会导致sealer安装完kubernetes集群后，立即部署应用服务，出现部署失败的情况。cluster check插件会等待kubernetes集群稳定后再部署应用服务。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">checkCluster</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">CLUSTERCHECK</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PreGuest</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="污点插件"><a href="#污点插件" class="headerlink" title="污点插件"></a>污点插件</h3><p>如果你在Clusterfile后添加taint插件配置并应用它，sealer将帮助你添加污点和去污点：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">taint</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">Taint</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PreGuest</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    192.168.56.3 key1=value1:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.4 key2=value2:NoSchedule-</span></span><br><span class="line"><span class="string">    192.168.56.3-192.168.56.7 key3:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.3,192.168.56.4,192.168.56.5,192.168.56.6,192.168.56.7 key4:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.3 key5=:NoSchedule</span></span><br><span class="line"><span class="string">    192.168.56.3 key6:NoSchedule-</span></span><br><span class="line"><span class="string">    192.168.56.4 key7:NoSchedule-</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>data写法为<code>ips taint_argument</code><br>ips           : 多个ip通过<code>,</code>连接，连续ip写法为 首ip-末尾ip<br>taint_argument: 同kubernetes 添加或去污点写法(key&#x3D;value:effect #effect必须为：NoSchedule, PreferNoSchedule 或 NoExecute)。</p>
+</blockquote>
+<h3 id="Etcd-备份插件"><a href="#Etcd-备份插件" class="headerlink" title="Etcd 备份插件"></a>Etcd 备份插件</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">MyBackup</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ETCD</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Out-of-tree-plugin"><a href="#Out-of-tree-plugin" class="headerlink" title="Out of tree plugin"></a>Out of tree plugin</h3><p>at present, we only support the golang so file as out of tree plugin. More description about golang plugin<br>see <a target="_blank" rel="noopener" href="https://pkg.go.dev/plugin">golang plugin website</a>.</p>
+<p>copy the so file and the plugin config to your cloud image at build stage use <code>Kubefile</code>,sealer will parse and execute<br>it. develop your own out of tree plugin see <a href="../advanced/develop-plugin.md">sealer plugin</a>.</p>
+<p>plugin config:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">label_nodes.so</span> <span class="comment"># out of tree plugin name</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LABEL_TEST_SO</span> <span class="comment"># define your own plugin type.</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span> <span class="comment"># which stage will this plugin be applied.</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line">    <span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span> <span class="string">ssd=true</span></span><br></pre></td></tr></table></figure>
+
+<p>Kubefile:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY label_nodes.so plugin</span><br><span class="line">COPY label_nodes.yaml plugin</span><br></pre></td></tr></table></figure>
+
+<p>Build a cluster image that contains the golang plugin (or more plugins):</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -m lite -t kubernetes-post-install:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何使用插件"><a href="#如何使用插件" class="headerlink" title="如何使用插件"></a>如何使用插件</h2><h3 id="通过Clusterfile使用插件"><a href="#通过Clusterfile使用插件" class="headerlink" title="通过Clusterfile使用插件"></a>通过Clusterfile使用插件</h3><p>例如，在安装kubernetes集群后设置节点标签:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.cloud/v2</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Cluster</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">default-kubernetes-cluster</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">kubernetes:v1.19.8</span></span><br><span class="line">  <span class="attr">ssh:</span></span><br><span class="line">    <span class="attr">passwd:</span> <span class="string">xxx</span></span><br><span class="line">  <span class="attr">hosts:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">ips:</span> [ <span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.3</span>,<span class="number">192.168</span><span class="number">.0</span><span class="number">.4</span> ]</span><br><span class="line">      <span class="attr">roles:</span> [ <span class="string">master</span> ]</span><br><span class="line">    <span class="bullet">-</span> <span class="attr">ips:</span> [ <span class="number">192.168</span><span class="number">.0</span><span class="number">.5</span> ]</span><br><span class="line">      <span class="attr">roles:</span> [ <span class="string">node</span> ]</span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">LABEL</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">LABEL</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line">    <span class="number">172.20</span><span class="number">.126</span><span class="number">.8</span> <span class="string">ssd=false,hdd=true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer apply -f Clusterfile</span><br></pre></td></tr></table></figure>
+
+<h3 id="在Kubefile中使用默认插件"><a href="#在Kubefile中使用默认插件" class="headerlink" title="在Kubefile中使用默认插件"></a>在Kubefile中使用默认插件</h3><p>在很多情况下，可以不使用Clusterfile而使用插件，本质上是在使用插件之前存储了Clusterfile插件到$rootfs&#x2F;plugins目录下 所以当我们构建镜像时可以添加自定义默认插件。</p>
+<p>插件配置文件 shell.yaml:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">taint</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">SHELL</span></span><br><span class="line"><span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line"><span class="attr">on:</span> <span class="string">node-role.kubernetes.io/master=</span></span><br><span class="line"><span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">  kubectl get nodes</span></span><br><span class="line"><span class="string"></span><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Plugin</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">SHELL</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">action:</span> <span class="string">PostInstall</span></span><br><span class="line">  <span class="attr">data:</span> <span class="string">|</span></span><br><span class="line"><span class="string">    if type yum &gt;/dev/null 2&gt;&amp;1;then</span></span><br><span class="line"><span class="string">    yum -y install iscsi-initiator-utils</span></span><br><span class="line"><span class="string">    systemctl enable iscsid</span></span><br><span class="line"><span class="string">    systemctl start iscsid</span></span><br><span class="line"><span class="string">    elif type apt-get &gt;/dev/null 2&gt;&amp;1;then</span></span><br><span class="line"><span class="string">    apt-get update</span></span><br><span class="line"><span class="string">    apt-get -y install open-iscsi</span></span><br><span class="line"><span class="string">    systemctl enable iscsid</span></span><br><span class="line"><span class="string">    systemctl start iscsid</span></span><br><span class="line"><span class="string">    fi</span></span><br></pre></td></tr></table></figure>
+
+<p>Kubefile:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY shell.yaml plugin</span><br></pre></td></tr></table></figure>
+
+<p>构建一个包含安装iscsi的插件(或更多插件)的集群镜像:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -m lite -t kubernetes-iscsi:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+<p>通过镜像启动集群后插件也将被执行，而无需在Clusterfile中定义插件:<br><code>sealer run kubernetes-iscsi:v1.19.8 -m x.x.x.x -p xxx</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/29/zh/getting-started/plugin/" data-id="cl1fryzyc000i26e2g2mo2rpo" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/getting-started/quick-start" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/23/zh/getting-started/quick-start/" class="article-date">
+  <time class="dt-published" datetime="2022-03-23T09:30:57.598Z" itemprop="datePublished">2022-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="使用sealer创建一个kubernetes集群"><a href="#使用sealer创建一个kubernetes集群" class="headerlink" title="使用sealer创建一个kubernetes集群"></a>使用sealer创建一个kubernetes集群</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载和安装sealer二进制</span></span><br><span class="line">wget https://github.com/alibaba/sealer/releases/download/v0.7.1/sealer-v0.7.1-linux-amd64.tar.gz &amp;&amp; \</span><br><span class="line">tar zxvf sealer-v0.7.1-linux-amd64.tar.gz &amp;&amp; mv sealer /usr/bin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行一个六节点的kubernetes集群</span></span><br><span class="line">sealer run kubernetes:v1.19.8 \</span><br><span class="line">  --masters 192.168.0.2,192.168.0.3,192.168.0.4 \</span><br><span class="line">  --node 192.168.0.5,192.168.0.6,192.168.0.7 --passwd xxx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@iZm5e42unzb79kod55hehvZ ~]# kubectl get node</span><br><span class="line">NAME                    STATUS ROLES AGE VERSION</span><br><span class="line">izm5e42unzb79kod55hehvz Ready master 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7r7z Ready master 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7r8z Ready master 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7r9z Ready &lt;none&gt; 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7raz Ready &lt;none&gt; 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7rbz Ready &lt;none&gt; 18h v1.19.8</span><br></pre></td></tr></table></figure>
+
+<h2 id="增加删除节点"><a href="#增加删除节点" class="headerlink" title="增加删除节点"></a>增加删除节点</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sealer join --masters 192.168.0.2,192.168.0.3,192.168.0.4</span><br><span class="line">sealer join --nodes 192.168.0.5,192.168.0.6,192.168.0.7</span><br></pre></td></tr></table></figure>
+
+<h2 id="清理集群"><a href="#清理集群" class="headerlink" title="清理集群"></a>清理集群</h2><p>创建集群会默认创建一个Clusterfile存储在 &#x2F;root&#x2F;.sealer&#x2F;[cluster-name]&#x2F;Clusterfile, 里面包含集群元数据信息.</p>
+<p>删除集群:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sealer delete -f /root/.sealer/my-cluster/Clusterfile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">sealer delete --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义集群镜像"><a href="#自定义集群镜像" class="headerlink" title="自定义集群镜像"></a>自定义集群镜像</h2><p>上面我们看到的<code>kubernetes:v1.19.8</code>就是一个标准的集群镜像，有时我们希望在集群镜像中带一些我们自己自定义的组件，就可以使用此功能。</p>
+<p>比如这里我们创建一个包含dashboard的集群镜像：</p>
+<p>Kubefile:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">基础镜像中包含安装kuberntes的所有依赖，sealer已经制作好，用户直接使用它即可</span></span><br><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载dashboard的yaml文件</span></span><br><span class="line">RUN wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">集群启动时的命令</span></span><br><span class="line">CMD kubectl apply -f recommended.yaml</span><br></pre></td></tr></table></figure>
+
+<p>构建集群镜像:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t dashboard:latest .</span><br></pre></td></tr></table></figure>
+
+<p>运行集群镜像，这时运行出来的就是一个包含了dashboard的集群:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sealer会启动一个kubernetes集群并在集群中启动dashboard</span></span><br><span class="line">sealer run dashboard:latest --masters 192.168.0.2 --passwd xxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看dashboard的pod</span></span><br><span class="line">kubectl get pod -A|grep dashboard</span><br></pre></td></tr></table></figure>
+
+<h2 id="把集群镜像推送到镜像仓库"><a href="#把集群镜像推送到镜像仓库" class="headerlink" title="把集群镜像推送到镜像仓库"></a>把集群镜像推送到镜像仓库</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sealer tag dashboard:latest registry.cn-qingdao.aliyuncs.com/sealer-io/dashboard:latest</span><br><span class="line">sealer push registry.cn-qingdao.aliyuncs.com/sealer-io/dashboard:latest</span><br></pre></td></tr></table></figure>
+
+<h2 id="镜像导入导出"><a href="#镜像导入导出" class="headerlink" title="镜像导入导出"></a>镜像导入导出</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sealer save -o dashboard.tar dashboard:latest</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以把tar拷贝到客户环境中进行load</span></span><br><span class="line">sealer load -i dashboard.tar</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/23/zh/getting-started/quick-start/" data-id="cl1fryzyc000j26e22lrr9lp4" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/getting-started/introduction" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/18/zh/getting-started/introduction/" class="article-date">
+  <time class="dt-published" datetime="2022-03-18T04:05:17.635Z" itemprop="datePublished">2022-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>sealer[ˈsiːlər] 可以像docker那样把整个集群制作成镜像，实现分布式软件的构建、交付、运行。</p>
+<p>应用场景：</p>
+<ul>
+<li>kubernetes集群安装</li>
+<li>kubernetes集群、数据库、中间件、SaaS应用整体打包，一键交付</li>
+<li>离线交付，多架构支持，国产化支持</li>
+<li>各种在kubernetes上编排的分布式应用交付</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/8912557/117263291-b88b8700-ae84-11eb-8b46-838292e85c5c.png"></p>
+<p>编写一个和Dockerfile很类似的Kubefile，就可以构建一个集群镜像，使用Clusterfile去运行一个集群。</p>
+<p><img src="https://user-images.githubusercontent.com/8912557/117400612-97cf3a00-af35-11eb-90b9-f5dc8e8117b5.png"></p>
+<p>Docker镜像很好的解决了单应用的打包问题，但是没有解决分布式应用的镜像问题。helm这类编排工具解决了编排问题，没有解决打包问题。</p>
+<p>目前集群没有打包标准，构建一个自定义的kubernetes集群也比较复杂，整个集群+分布式应用部署也是面向过程，交付问题爆炸屡屡得不到干净利索的解决，集群整体交付一致性差。</p>
+<p>特别是在专有云交付领域，一个分布式软件往往有非常多的配置，以及很多应用镜像和依赖，甚至有些情况还需要在离线情况下进行交付，交付过程面临着非常大的挑战。</p>
+<p>集群镜像把整个集群看成一台服务器，把k8s看成云操作系统，实现整个集群的镜像化打包和交付，为企业级软件提供一种“开箱即用”的应用封装技术。</p>
+<p>通过非常简单的方式把一个应用的所有依赖进行标准化打包，一键运行到客户的集群中去，并且可以兼容复杂的基础设施，保障集群镜像构建过程没问题运行就没问题。</p>
+<p>集群镜像市场中会提供非常多已经构建好的可复用镜像，软件的使用者可以像搭建积木一样灵活的组合这些镜像服务与自己的应用，如SaaS应用依赖的数据库，消息队列，甚至k8s本身都可以直接在市场中找到。</p>
+<p>使用集群镜像技术最终能帮助企业一键拉起一个复杂的自定义集群，大幅提升交付效率，降低交付出错率，直接复用成熟稳定的组件也可使软件稳定性大大提升。</p>
+<p>交付人员不用再关心复杂的部署细节，解决了软件生产者和使用者之间的协作问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/18/zh/getting-started/introduction/" data-id="cl1fryzyb000h26e23vl8gy4c" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/advanced/save-charts-package" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/18/zh/advanced/save-charts-package/" class="article-date">
+  <time class="dt-published" datetime="2022-03-18T04:05:17.632Z" itemprop="datePublished">2022-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Save-helm-chart-package"><a href="#Save-helm-chart-package" class="headerlink" title="Save helm chart package"></a>Save helm chart package</h1><p>Sealer support to save raw helm chart package to cloud image as oci format. with this feature, we can pull the helm<br>chart package in other offline production environment.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Prepare two nodes named the build node and the run node. At the same time need to install sealer and helm on it.</p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="On-the-build-node"><a href="#On-the-build-node" class="headerlink" title="On the build node."></a>On the build node.</h3><h4 id="Start-docker-registry-to-save-helm-chart-package"><a href="#Start-docker-registry-to-save-helm-chart-package" class="headerlink" title="Start docker registry to save helm chart package."></a>Start docker registry to save helm chart package.</h4><p>start docker registry to transfer helm chart package to oci format.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 5000:5000  --restart=always --name registry -v /registry/:/var/lib/registry -d registry</span><br></pre></td></tr></table></figure>
+
+<p>use helm push to save helm chart package to registry.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HELM_EXPERIMENTAL_OCI=1</span><br><span class="line">helm push mysql-8.8.25.tgz oci://localhost:5000/helm-charts</span><br></pre></td></tr></table></figure>
+
+<h4 id="Use-sealer-build-to-save-helm-chart-package-from-local-registry-to-cloud-image"><a href="#Use-sealer-build-to-save-helm-chart-package-from-local-registry-to-cloud-image" class="headerlink" title="Use sealer build to save helm chart package from local registry to cloud image."></a>Use sealer build to save helm chart package from local registry to cloud image.</h4><p>Prepare Kubefile:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@iZbp16ikro46xwgqzij67sZ build]# cat Kubefile</span><br><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY imageList manifests</span><br></pre></td></tr></table></figure>
+
+<p>Prepare imageList file:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@iZbp16ikro46xwgqzij67sZ build]# cat imageList</span><br><span class="line">localhost:5000/helm-charts/mysql:8.8.25</span><br><span class="line">localhost:5000/helm-charts/nginx:9.8.0</span><br></pre></td></tr></table></figure>
+
+<p>Then run <code>sealer build -t my-kubernetes:v1.19.8 -f Kubefile .</code>and we can<br>use <code>sealer save my-kubernetes:v1.19.8 -o my-kubernetes.tar</code> to save the image to the local filesystem.</p>
+<h3 id="On-the-run-node"><a href="#On-the-run-node" class="headerlink" title="On the run node."></a>On the run node.</h3><p>load the image <code>my-kubernetes.tar</code> from the build node use <code>sealer load -i my-kubernetes.tar</code>.</p>
+<h4 id="Use-sealer-run-to-start-the-cluster"><a href="#Use-sealer-run-to-start-the-cluster" class="headerlink" title="Use sealer run to start the cluster"></a>Use sealer run to start the cluster</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer run -d my-kubernetes:v1.19.8 -p password -m 172.16.0.230</span><br></pre></td></tr></table></figure>
+
+<h4 id="Pull-Helm-chart-on-the-run-node"><a href="#Pull-Helm-chart-on-the-run-node" class="headerlink" title="Pull Helm chart on the run node."></a>Pull Helm chart on the run node.</h4><p>When the cluster is up, we can pull the helm chart package use helm pull:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HELM_EXPERIMENTAL_OCI=1</span><br><span class="line">helm pull oci://sea.hub:5000/helm-charts/mysql --version 8.8.25</span><br></pre></td></tr></table></figure>
+
+<h2 id="Save-ACR-chart"><a href="#Save-ACR-chart" class="headerlink" title="Save ACR chart"></a>Save ACR chart</h2><p>Example to pull <code>chart-registry.cn-shanghai.cr.aliyuncs.com/aliyun-inc.com/elasticsearch:1.0.1-elasticsearch.elasticsearch</code> chart.</p>
+<ol>
+<li>Login your ACR registry</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sealer login sealer login chart-registry.cn-shanghai.cr.aliyuncs.com \</span><br><span class="line">   --username cnx-platform@prod.trusteeship.aliyunid.com --passwd xxx</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Create Kubefile and imageList</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2zeasfsez3jrior15rpbZ chart]# cat imageList</span><br><span class="line">chart-registry.cn-shanghai.cr.aliyuncs.com/aliyun-inc.com/elasticsearch:1.0.1-elasticsearch.elasticsearch</span><br><span class="line">[root@iZ2zeasfsez3jrior15rpbZ chart]# cat Kubefile</span><br><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY imageList manifests</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Build CloudImage and save ACR remote chart to local registry</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t chart:latest .</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Run a cluster</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer run chart:latest -m x.x.x.x -p xxx</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Try to pull chart using helm from local registry</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2zeasfsez3jrior15rpbZ certs]# helm pull oci://sea.hub:5000/aliyun-inc.com/elasticsearch --version 1.0.1-elasticsearch.elasticsearch</span><br><span class="line">Warning: chart media type application/tar+gzip is deprecated</span><br><span class="line">Pulled: sea.hub:5000/aliyun-inc.com/elasticsearch:1.0.1-elasticsearch.elasticsearch</span><br><span class="line">Digest: sha256:c247fd56b985cfa4ad58c8697dc867a69ee1861a1a625b96a7b9d78ed5d9df95</span><br><span class="line">[root@iZ2zeasfsez3jrior15rpbZ certs]# ls</span><br><span class="line">elasticsearch-1.0.1-elasticsearch.elasticsearch.tgz</span><br></pre></td></tr></table></figure>
+
+<p>If you got <code>Error: failed to do request: Head &quot;https://sea.hub:5000/v2/aliyun-inc.com/elasticsearch/manifests/1.0.1-elasticsearch.elasticsearch&quot;: x509: certificate signed by unknown authority </code> error, trust registry cert on your host:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /var/lib/sealer/data/my-cluster/certs/sea.hub.crt /etc/pki/ca-trust/source/anchors/ &amp;&amp; update-ca-trust extract</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/18/zh/advanced/save-charts-package/" data-id="cl1fryzy7000c26e2fkirffc5" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/advanced/define-cloudrootfs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/02/zh/advanced/define-cloudrootfs/" class="article-date">
+  <time class="dt-published" datetime="2022-03-02T06:55:10.753Z" itemprop="datePublished">2022-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Define-your-own-CloudRootfs"><a href="#Define-your-own-CloudRootfs" class="headerlink" title="Define your own CloudRootfs"></a>Define your own CloudRootfs</h1><p>All the files which run a kubernetes cluster needs.</p>
+<p>Contains:</p>
+<ul>
+<li>Bin files, like docker, containerd, crictl ,kubeadm, kubectl…</li>
+<li>Config files, like kubelet systemd config, docker systemd config, docker daemon.json…</li>
+<li>Registry docker image.</li>
+<li>Some Metadata, like Kubernetes version.</li>
+<li>Registry files, contains all the docker image, like kubernetes core component docker images…</li>
+<li>Scripts, some shell script using to install docker and kubelet… sealer will call init.sh and clean.sh.</li>
+<li>Other static files</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├──</span> <span class="string">bin</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">conntrack</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-rootless-setuptool.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-rootless.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">crictl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubeadm</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubectl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubelet</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">nerdctl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">seautil</span></span><br><span class="line"><span class="string">├──</span> <span class="string">cri</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-shim</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-shim-runc-v2</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">ctr</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">dockerd</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker-init</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker-proxy</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">rootlesskit</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">rootlesskit-docker-proxy</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">runc</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">vpnkit</span></span><br><span class="line"><span class="string">├──</span> <span class="string">etc</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="number">10</span><span class="string">-kubeadm.conf</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">Clusterfile</span>  <span class="comment"># image default Clusterfile</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">daemon.json</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker.service</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubeadm-config.yaml</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">kubelet.service</span></span><br><span class="line"><span class="string">├──</span> <span class="string">images</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">registry.tar</span>  <span class="comment"># registry docker image, will load this image and run a local registry in cluster</span></span><br><span class="line"><span class="string">├──</span> <span class="string">Kubefile</span></span><br><span class="line"><span class="string">├──</span> <span class="string">Metadata</span></span><br><span class="line"><span class="string">├──</span> <span class="string">README.md</span></span><br><span class="line"><span class="string">├──</span> <span class="string">registry</span> <span class="comment"># will mount this dir to local registry</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">docker</span></span><br><span class="line"><span class="string">│</span>       <span class="string">└──</span> <span class="string">registry</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">clean.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init-kube.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init-registry.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">kubelet-pre-start.sh</span></span><br><span class="line"><span class="string">└──</span> <span class="string">statics</span> <span class="comment"># yaml files, sealer will render values in those files</span></span><br><span class="line">    <span class="string">└──</span> <span class="string">audit-policy.yml</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="How-can-I-get-CloudRootfs"><a href="#How-can-I-get-CloudRootfs" class="headerlink" title="How can I get CloudRootfs"></a>How can I get CloudRootfs</h2><ol>
+<li>Pull a BaseImage <code>sealer pull kubernetes:v1.19.8-alpine</code></li>
+<li>View the image layer information <code>sealer inspect kubernetes:v1.19.8-alpine</code></li>
+<li>Get into the BaseImage Layer <code>ls /var/lib/sealer/data/overlay2/&#123;layer-id&#125;</code></li>
+</ol>
+<p>You will find the CloudRootfs layer.</p>
+<h2 id="Build-your-own-BaseImage"><a href="#Build-your-own-BaseImage" class="headerlink" title="Build your own BaseImage"></a>Build your own BaseImage</h2><p>You can edit any files in CloudRootfs you want, for example you want to define your own docker daemon.json, just edit it and build a new CloudImage.</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM scratch</span><br><span class="line">COPY . .</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t user-defined-kubernetes:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+<p>Then you can use this image as a BaseImage.</p>
+<h2 id="OverWrite-CloudRootfs-files"><a href="#OverWrite-CloudRootfs-files" class="headerlink" title="OverWrite CloudRootfs files"></a>OverWrite CloudRootfs files</h2><p>Sometimes you don’t want to care about the CloudRootfs context, but need custom some config.</p>
+<p>You can use <code>kubernetes:v1.19.8</code> as BaseImage, and use your own config file to overwrite the default file in CloudRootfs.</p>
+<p>For example: daemon.json is your docker engine config, using it to overwrite default config:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY daemon.json etc/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t user-defined-kubernetes:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/02/zh/advanced/define-cloudrootfs/" data-id="cl1fryzy1000726e2hdoeej0c" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/reference/cloudrootfs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/02/zh/reference/cloudrootfs/" class="article-date">
+  <time class="dt-published" datetime="2022-03-02T06:54:21.233Z" itemprop="datePublished">2022-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="What-is-CloudRootfs"><a href="#What-is-CloudRootfs" class="headerlink" title="What is CloudRootfs"></a>What is CloudRootfs</h1><p>All the files witch run a kubernetes cluster needs.</p>
+<p>Contains:</p>
+<ul>
+<li>Bin files, like docker containerd crictl kubeadm kubectl…</li>
+<li>Config files, like kubelet systemd config, docker systemd config, docker daemon.json…</li>
+<li>Registry docker image</li>
+<li>Some Metadata, like Kubernetes version.</li>
+<li>Registry files, contains all the docker image, like kubernetes core component docker images…</li>
+<li>Scripts, some shell script using to install docker and kubelet… sealer will call init.sh and clean.sh.</li>
+<li>Other static files</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├──</span> <span class="string">bin</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">conntrack</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-rootless-setuptool.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-rootless.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">crictl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubeadm</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubectl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubelet</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">nerdctl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">seautil</span></span><br><span class="line"><span class="string">├──</span> <span class="string">cri</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-shim</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-shim-runc-v2</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">ctr</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">dockerd</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker-init</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker-proxy</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">rootlesskit</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">rootlesskit-docker-proxy</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">runc</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">vpnkit</span></span><br><span class="line"><span class="string">├──</span> <span class="string">etc</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="number">10</span><span class="string">-kubeadm.conf</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">Clusterfile</span>  <span class="comment"># image default Clusterfile</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">daemon.json</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker.service</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubeadm-config.yaml</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">kubelet.service</span></span><br><span class="line"><span class="string">├──</span> <span class="string">images</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">registry.tar</span>  <span class="comment"># registry docker image, will load this image and run a local registry in cluster</span></span><br><span class="line"><span class="string">├──</span> <span class="string">Kubefile</span></span><br><span class="line"><span class="string">├──</span> <span class="string">Metadata</span></span><br><span class="line"><span class="string">├──</span> <span class="string">README.md</span></span><br><span class="line"><span class="string">├──</span> <span class="string">registry</span> <span class="comment"># will mount this dir to local registry</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">docker</span></span><br><span class="line"><span class="string">│</span>       <span class="string">└──</span> <span class="string">registry</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">clean.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init-kube.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init-registry.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">kubelet-pre-start.sh</span></span><br><span class="line"><span class="string">└──</span> <span class="string">statics</span> <span class="comment"># yaml files, sealer will render values in those files</span></span><br><span class="line">    <span class="string">└──</span> <span class="string">audit-policy.yml</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="How-can-I-get-CloudRootfs"><a href="#How-can-I-get-CloudRootfs" class="headerlink" title="How can I get CloudRootfs"></a>How can I get CloudRootfs</h2><ol>
+<li>Pull a BaseImage <code>sealer pull kubernetes:v1.19.8-alpine</code></li>
+<li>View the image layer information <code>sealer inspect kubernetes:v1.19.8-alpine</code></li>
+<li>Get into the BaseImage Layer <code>ls /var/lib/sealer/data/overlay2/&#123;layer-id&#125;</code></li>
+</ol>
+<p>You will found the CloudRootfs layer.</p>
+<h2 id="Build-your-own-BaseImage"><a href="#Build-your-own-BaseImage" class="headerlink" title="Build your own BaseImage"></a>Build your own BaseImage</h2><p>You can edit any files in CloudRootfs you want, for example you want to define your own docker daemon.json, just edit it and build a new CloudImage.</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM scratch</span><br><span class="line">COPY . .</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t user-defined-kubernetes:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+<p>Then you can use this image as a BaseImage.</p>
+<h2 id="OverWrite-CloudRootfs-files"><a href="#OverWrite-CloudRootfs-files" class="headerlink" title="OverWrite CloudRootfs files"></a>OverWrite CloudRootfs files</h2><p>Sometimes you don’t want to care about the CloudRootfs context, but need custom some config.</p>
+<p>You can use <code>kubernetes:v1.19.8</code> as BaseImage, and use your own config file to overwrite the default file in CloudRootfs.</p>
+<p>For example: daemon.json is your docker engine config, using it to overwrite default config:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY daemon.json etc/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t user-defined-kubernetes:v1.19.8 .</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/02/zh/reference/cloudrootfs/" data-id="cl1fryzyf000m26e25t2she4q" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/reference/clusterfile" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/15/zh/reference/clusterfile/" class="article-date">
+  <time class="dt-published" datetime="2022-02-15T02:17:58.626Z" itemprop="datePublished">2022-02-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Clusterfile-definition"><a href="#Clusterfile-definition" class="headerlink" title="Clusterfile definition"></a>Clusterfile definition</h1><p>Install to existing servers, the provider is <code>BAREMETAL</code>:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Cluster</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">my-cluster</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">registry.cn-qingdao.aliyuncs.com/sealer-io/kubernetes:v1.19.8</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">BAREMETAL</span></span><br><span class="line">  <span class="attr">ssh:</span> <span class="comment"># host ssh config</span></span><br><span class="line">    <span class="comment"># ssh login password. If you use the key, you don&#x27;t need to set the password</span></span><br><span class="line">    <span class="attr">passwd:</span></span><br><span class="line">    <span class="comment"># The absolute path of the ssh private key file, for example, /root/.ssh/id_rsa</span></span><br><span class="line">    <span class="attr">pk:</span> <span class="string">xxx</span></span><br><span class="line">    <span class="comment"># ssh private key file password</span></span><br><span class="line">    <span class="attr">pkPasswd:</span> <span class="string">xxx</span></span><br><span class="line">    <span class="comment"># ssh login user</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">network:</span></span><br><span class="line">    <span class="attr">podCIDR:</span> <span class="number">100.64</span><span class="number">.0</span><span class="number">.0</span><span class="string">/10</span></span><br><span class="line">    <span class="attr">svcCIDR:</span> <span class="number">10.96</span><span class="number">.0</span><span class="number">.0</span><span class="string">/22</span></span><br><span class="line">  <span class="attr">certSANS:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">aliyun-inc.com</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">10.0</span><span class="number">.0</span><span class="number">.2</span></span><br><span class="line">  <span class="attr">masters:</span></span><br><span class="line">    <span class="attr">ipList:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">172.20</span><span class="number">.125</span><span class="number">.1</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">172.20</span><span class="number">.126</span><span class="number">.2</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">172.20</span><span class="number">.126</span><span class="number">.3</span></span><br><span class="line">  <span class="attr">nodes:</span></span><br><span class="line">    <span class="attr">ipList:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">172.20</span><span class="number">.126</span><span class="number">.7</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">172.20</span><span class="number">.126</span><span class="number">.8</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">172.20</span><span class="number">.126</span><span class="number">.9</span></span><br></pre></td></tr></table></figure>
+
+<p>Automatically apply ali cloud server for installation, the provider is <code>ALI_CLOUD</code>. Or using container for installation，the provider is <code>CONTAINER</code>:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">sealer.aliyun.com/v1alpha1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Cluster</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">my-cluster</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">registry.cn-qingdao.aliyuncs.com/sealer-io/kubernetes:v1.19.8</span> <span class="comment"># name of CloudImage</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">ALI_CLOUD</span> <span class="comment"># OR CONTAINER</span></span><br><span class="line">  <span class="attr">ssh:</span> <span class="comment"># custom host ssh config</span></span><br><span class="line">    <span class="attr">passwd:</span> <span class="string">xxx</span></span><br><span class="line">    <span class="attr">pk:</span> <span class="string">xxx</span></span><br><span class="line">    <span class="attr">pkPasswd:</span> <span class="string">xxx</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">  <span class="attr">network:</span></span><br><span class="line">    <span class="attr">podCIDR:</span> <span class="number">100.64</span><span class="number">.0</span><span class="number">.0</span><span class="string">/10</span></span><br><span class="line">    <span class="attr">svcCIDR:</span> <span class="number">10.96</span><span class="number">.0</span><span class="number">.0</span><span class="string">/22</span></span><br><span class="line">  <span class="attr">certSANS:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">aliyun-inc.com</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">10.0</span><span class="number">.0</span><span class="number">.2</span></span><br><span class="line">  <span class="attr">masters:</span> <span class="comment"># You can specify the number of servers, system disk, data disk, cpu and memory size</span></span><br><span class="line">    <span class="attr">cpu:</span> <span class="number">4</span></span><br><span class="line">    <span class="attr">memory:</span> <span class="number">8</span></span><br><span class="line">    <span class="attr">count:</span> <span class="number">3</span></span><br><span class="line">    <span class="attr">systemDisk:</span> <span class="number">100</span></span><br><span class="line">    <span class="attr">dataDisks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">100</span></span><br><span class="line">  <span class="attr">nodes:</span></span><br><span class="line">    <span class="attr">cpu:</span> <span class="number">5</span></span><br><span class="line">    <span class="attr">memory:</span> <span class="number">8</span></span><br><span class="line">    <span class="attr">count:</span> <span class="number">3</span></span><br><span class="line">    <span class="attr">systemDisk:</span> <span class="number">100</span></span><br><span class="line">    <span class="attr">dataDisks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">100</span></span><br><span class="line">  <span class="attr">status:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/15/zh/reference/clusterfile/" data-id="cl1fryzyg000n26e292y2ahro" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-zh/reference/kubefile" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/15/zh/reference/kubefile/" class="article-date">
+  <time class="dt-published" datetime="2022-02-15T02:17:58.626Z" itemprop="datePublished">2022-02-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Kubefile-instruction"><a href="#Kubefile-instruction" class="headerlink" title="Kubefile instruction"></a>Kubefile instruction</h1><p>A <code>Kubefile</code> is a text document that contains all the commands a user could call on the command line to assemble an<br>image.We can use the <code>Kubefile</code> to define a cluster image that can be shared and deployed offline. a <code>Kubefile</code> just<br>like <code>Dockerfile</code> which contains the build instructions to define the specific cluster.</p>
+<h2 id="FROM-instruction"><a href="#FROM-instruction" class="headerlink" title="FROM instruction"></a>FROM instruction</h2><p>The <code>FROM</code> instruction defines which base image you want reference, and the first instruction in Kubefile must be the<br>FROM instruction. Registry authentication information is required if the base image is a private image. By the way<br>official base images are available from the Sealer community.</p>
+<blockquote>
+<p>command format：FROM {your base image name}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example ,use the base image <code>kubernetes:v1.19.8</code> which provided by the Sealer community to build a new cloud image.</p>
+<p><code>FROM registry.cn-qingdao.aliyuncs.com/sealer-io/kubernetes:v1.19.8</code></p>
+<h2 id="COPY-instruction"><a href="#COPY-instruction" class="headerlink" title="COPY instruction"></a>COPY instruction</h2><p>The <code>COPY</code> instruction used to copy the contents from the context path such as file or directory to the <code>rootfs</code>. all<br>the cloud image is based on the <a href="../../../../api/cloudrootfs.md">rootfs</a>, and the default src path is<br>the <code>rootfs</code> .If the specified destination directory does not exist, sealer will create it automatically.</p>
+<blockquote>
+<p>command format：COPY {src dest}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example , copy <code>mysql.yaml</code>to<code>rootfs/mysql.yaml</code></p>
+<p><code>COPY mysql.yaml .</code></p>
+<p>For example , copy directory <code>apollo</code> to <code>rootfs/charts/apollo</code></p>
+<p><code>COPY apollo charts</code></p>
+<h2 id="RUN-instruction"><a href="#RUN-instruction" class="headerlink" title="RUN instruction"></a>RUN instruction</h2><p>The RUN instruction will execute any commands in a new layer on top of the current image and commit the results. The<br>resulting committed image will be used for the next step in the <code>Kubefile</code>.</p>
+<blockquote>
+<p>command format：RUN {command args …}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example ,Using <code>RUN</code> instruction to execute a commands that download kubernetes dashboard.</p>
+<p><code>RUN wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml</code></p>
+<h3 id="CMD-instruction"><a href="#CMD-instruction" class="headerlink" title="CMD instruction"></a>CMD instruction</h3><p>The format of CMD instruction is similar to RUN instruction, and also will execute any commands in a new layer. However,<br>the CMD command will be executed when the cluster is started . it is generally used to start applications or configure<br>the cluster. and it is different with <code>Dockerfile</code> CMD ,If you list more than one CMD in a <code>Kubefile</code> ,then all of them<br>will take effect.</p>
+<blockquote>
+<p>command format：CMD {command args …}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example ,Using <code>CMD</code> instruction to execute a commands that apply the kubernetes dashboard yaml.</p>
+<p><code>CMD kubectl apply -f recommended.yaml</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/15/zh/reference/kubefile/" data-id="cl1fryzyh000o26e2dhblca4q" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -123,6 +620,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -140,7 +642,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
     </div>
   </div>
 
@@ -153,7 +655,23 @@
       <ul>
         
           <li>
+            <a href="/2022/04/01/blog/">blog</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/29/zh/getting-started/plugin/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/zh/getting-started/quick-start/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/zh/getting-started/introduction/">(no title)</a>
           </li>
         
       </ul>

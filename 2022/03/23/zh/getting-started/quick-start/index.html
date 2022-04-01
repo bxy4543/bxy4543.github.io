@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="快速开始使用sealer创建一个kubernetes集群script1234567# 下载和安装sealer二进制wget https:&#x2F;&#x2F;github.com&#x2F;alibaba&#x2F;sealer&#x2F;releases&#x2F;download&#x2F;v0.7.1&#x2F;sealer-v0.7.1-linux-amd64.tar.gz &amp;&amp; \tar zxvf sealer-v0.7.1-linux-amd64">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/03/23/zh/getting-started/quick-start/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="快速开始使用sealer创建一个kubernetes集群script1234567# 下载和安装sealer二进制wget https:&#x2F;&#x2F;github.com&#x2F;alibaba&#x2F;sealer&#x2F;releases&#x2F;download&#x2F;v0.7.1&#x2F;sealer-v0.7.1-linux-amd64.tar.gz &amp;&amp; \tar zxvf sealer-v0.7.1-linux-amd64">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-23T09:30:57.598Z">
+<meta property="article:modified_time" content="2022-03-23T09:30:57.598Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-zh/getting-started/quick-start" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/23/zh/getting-started/quick-start/" class="article-date">
+  <time class="dt-published" datetime="2022-03-23T09:30:57.598Z" itemprop="datePublished">2022-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="使用sealer创建一个kubernetes集群"><a href="#使用sealer创建一个kubernetes集群" class="headerlink" title="使用sealer创建一个kubernetes集群"></a>使用sealer创建一个kubernetes集群</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载和安装sealer二进制</span></span><br><span class="line">wget https://github.com/alibaba/sealer/releases/download/v0.7.1/sealer-v0.7.1-linux-amd64.tar.gz &amp;&amp; \</span><br><span class="line">tar zxvf sealer-v0.7.1-linux-amd64.tar.gz &amp;&amp; mv sealer /usr/bin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行一个六节点的kubernetes集群</span></span><br><span class="line">sealer run kubernetes:v1.19.8 \</span><br><span class="line">  --masters 192.168.0.2,192.168.0.3,192.168.0.4 \</span><br><span class="line">  --node 192.168.0.5,192.168.0.6,192.168.0.7 --passwd xxx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@iZm5e42unzb79kod55hehvZ ~]# kubectl get node</span><br><span class="line">NAME                    STATUS ROLES AGE VERSION</span><br><span class="line">izm5e42unzb79kod55hehvz Ready master 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7r7z Ready master 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7r8z Ready master 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7r9z Ready &lt;none&gt; 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7raz Ready &lt;none&gt; 18h v1.19.8</span><br><span class="line">izm5ehdjw3kru84f0kq7rbz Ready &lt;none&gt; 18h v1.19.8</span><br></pre></td></tr></table></figure>
+
+<h2 id="增加删除节点"><a href="#增加删除节点" class="headerlink" title="增加删除节点"></a>增加删除节点</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sealer join --masters 192.168.0.2,192.168.0.3,192.168.0.4</span><br><span class="line">sealer join --nodes 192.168.0.5,192.168.0.6,192.168.0.7</span><br></pre></td></tr></table></figure>
+
+<h2 id="清理集群"><a href="#清理集群" class="headerlink" title="清理集群"></a>清理集群</h2><p>创建集群会默认创建一个Clusterfile存储在 &#x2F;root&#x2F;.sealer&#x2F;[cluster-name]&#x2F;Clusterfile, 里面包含集群元数据信息.</p>
+<p>删除集群:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sealer delete -f /root/.sealer/my-cluster/Clusterfile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">sealer delete --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义集群镜像"><a href="#自定义集群镜像" class="headerlink" title="自定义集群镜像"></a>自定义集群镜像</h2><p>上面我们看到的<code>kubernetes:v1.19.8</code>就是一个标准的集群镜像，有时我们希望在集群镜像中带一些我们自己自定义的组件，就可以使用此功能。</p>
+<p>比如这里我们创建一个包含dashboard的集群镜像：</p>
+<p>Kubefile:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">基础镜像中包含安装kuberntes的所有依赖，sealer已经制作好，用户直接使用它即可</span></span><br><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载dashboard的yaml文件</span></span><br><span class="line">RUN wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">集群启动时的命令</span></span><br><span class="line">CMD kubectl apply -f recommended.yaml</span><br></pre></td></tr></table></figure>
+
+<p>构建集群镜像:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t dashboard:latest .</span><br></pre></td></tr></table></figure>
+
+<p>运行集群镜像，这时运行出来的就是一个包含了dashboard的集群:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sealer会启动一个kubernetes集群并在集群中启动dashboard</span></span><br><span class="line">sealer run dashboard:latest --masters 192.168.0.2 --passwd xxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看dashboard的pod</span></span><br><span class="line">kubectl get pod -A|grep dashboard</span><br></pre></td></tr></table></figure>
+
+<h2 id="把集群镜像推送到镜像仓库"><a href="#把集群镜像推送到镜像仓库" class="headerlink" title="把集群镜像推送到镜像仓库"></a>把集群镜像推送到镜像仓库</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sealer tag dashboard:latest registry.cn-qingdao.aliyuncs.com/sealer-io/dashboard:latest</span><br><span class="line">sealer push registry.cn-qingdao.aliyuncs.com/sealer-io/dashboard:latest</span><br></pre></td></tr></table></figure>
+
+<h2 id="镜像导入导出"><a href="#镜像导入导出" class="headerlink" title="镜像导入导出"></a>镜像导入导出</h2><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sealer save -o dashboard.tar dashboard:latest</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以把tar拷贝到客户环境中进行load</span></span><br><span class="line">sealer load -i dashboard.tar</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/23/zh/getting-started/quick-start/" data-id="cl1fryzyc000j26e22lrr9lp4" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/29/zh/getting-started/plugin/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/18/zh/getting-started/introduction/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/01/blog/">blog</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/29/zh/getting-started/plugin/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/zh/getting-started/quick-start/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/zh/getting-started/introduction/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

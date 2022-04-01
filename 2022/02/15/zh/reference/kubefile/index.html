@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Kubefile instructionA Kubefile is a text document that contains all the commands a user could call on the command line to assemble animage.We can use the Kubefile to define a cluster image that can be">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/15/zh/reference/kubefile/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Kubefile instructionA Kubefile is a text document that contains all the commands a user could call on the command line to assemble animage.We can use the Kubefile to define a cluster image that can be">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-15T02:17:58.626Z">
+<meta property="article:modified_time" content="2022-02-15T02:17:58.626Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-zh/reference/kubefile" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/15/zh/reference/kubefile/" class="article-date">
+  <time class="dt-published" datetime="2022-02-15T02:17:58.626Z" itemprop="datePublished">2022-02-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Kubefile-instruction"><a href="#Kubefile-instruction" class="headerlink" title="Kubefile instruction"></a>Kubefile instruction</h1><p>A <code>Kubefile</code> is a text document that contains all the commands a user could call on the command line to assemble an<br>image.We can use the <code>Kubefile</code> to define a cluster image that can be shared and deployed offline. a <code>Kubefile</code> just<br>like <code>Dockerfile</code> which contains the build instructions to define the specific cluster.</p>
+<h2 id="FROM-instruction"><a href="#FROM-instruction" class="headerlink" title="FROM instruction"></a>FROM instruction</h2><p>The <code>FROM</code> instruction defines which base image you want reference, and the first instruction in Kubefile must be the<br>FROM instruction. Registry authentication information is required if the base image is a private image. By the way<br>official base images are available from the Sealer community.</p>
+<blockquote>
+<p>command format：FROM {your base image name}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example ,use the base image <code>kubernetes:v1.19.8</code> which provided by the Sealer community to build a new cloud image.</p>
+<p><code>FROM registry.cn-qingdao.aliyuncs.com/sealer-io/kubernetes:v1.19.8</code></p>
+<h2 id="COPY-instruction"><a href="#COPY-instruction" class="headerlink" title="COPY instruction"></a>COPY instruction</h2><p>The <code>COPY</code> instruction used to copy the contents from the context path such as file or directory to the <code>rootfs</code>. all<br>the cloud image is based on the <a href="../../../../api/cloudrootfs.md">rootfs</a>, and the default src path is<br>the <code>rootfs</code> .If the specified destination directory does not exist, sealer will create it automatically.</p>
+<blockquote>
+<p>command format：COPY {src dest}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example , copy <code>mysql.yaml</code>to<code>rootfs/mysql.yaml</code></p>
+<p><code>COPY mysql.yaml .</code></p>
+<p>For example , copy directory <code>apollo</code> to <code>rootfs/charts/apollo</code></p>
+<p><code>COPY apollo charts</code></p>
+<h2 id="RUN-instruction"><a href="#RUN-instruction" class="headerlink" title="RUN instruction"></a>RUN instruction</h2><p>The RUN instruction will execute any commands in a new layer on top of the current image and commit the results. The<br>resulting committed image will be used for the next step in the <code>Kubefile</code>.</p>
+<blockquote>
+<p>command format：RUN {command args …}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example ,Using <code>RUN</code> instruction to execute a commands that download kubernetes dashboard.</p>
+<p><code>RUN wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml</code></p>
+<h3 id="CMD-instruction"><a href="#CMD-instruction" class="headerlink" title="CMD instruction"></a>CMD instruction</h3><p>The format of CMD instruction is similar to RUN instruction, and also will execute any commands in a new layer. However,<br>the CMD command will be executed when the cluster is started . it is generally used to start applications or configure<br>the cluster. and it is different with <code>Dockerfile</code> CMD ,If you list more than one CMD in a <code>Kubefile</code> ,then all of them<br>will take effect.</p>
+<blockquote>
+<p>command format：CMD {command args …}</p>
+</blockquote>
+<p>USAGE：</p>
+<p>For example ,Using <code>CMD</code> instruction to execute a commands that apply the kubernetes dashboard yaml.</p>
+<p><code>CMD kubectl apply -f recommended.yaml</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/15/zh/reference/kubefile/" data-id="cl1fryzyh000o26e2dhblca4q" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/15/zh/reference/clusterfile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/15/zh/reference/cli/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/01/blog/">blog</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/29/zh/getting-started/plugin/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/zh/getting-started/quick-start/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/zh/getting-started/introduction/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

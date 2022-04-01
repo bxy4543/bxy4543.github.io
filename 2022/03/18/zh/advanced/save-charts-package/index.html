@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Save helm chart packageSealer support to save raw helm chart package to cloud image as oci format. with this feature, we can pull the helmchart package in other offline production environment. Prerequ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/03/18/zh/advanced/save-charts-package/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Save helm chart packageSealer support to save raw helm chart package to cloud image as oci format. with this feature, we can pull the helmchart package in other offline production environment. Prerequ">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-18T04:05:17.632Z">
+<meta property="article:modified_time" content="2022-03-18T04:05:17.632Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-zh/advanced/save-charts-package" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/18/zh/advanced/save-charts-package/" class="article-date">
+  <time class="dt-published" datetime="2022-03-18T04:05:17.632Z" itemprop="datePublished">2022-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Save-helm-chart-package"><a href="#Save-helm-chart-package" class="headerlink" title="Save helm chart package"></a>Save helm chart package</h1><p>Sealer support to save raw helm chart package to cloud image as oci format. with this feature, we can pull the helm<br>chart package in other offline production environment.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Prepare two nodes named the build node and the run node. At the same time need to install sealer and helm on it.</p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="On-the-build-node"><a href="#On-the-build-node" class="headerlink" title="On the build node."></a>On the build node.</h3><h4 id="Start-docker-registry-to-save-helm-chart-package"><a href="#Start-docker-registry-to-save-helm-chart-package" class="headerlink" title="Start docker registry to save helm chart package."></a>Start docker registry to save helm chart package.</h4><p>start docker registry to transfer helm chart package to oci format.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 5000:5000  --restart=always --name registry -v /registry/:/var/lib/registry -d registry</span><br></pre></td></tr></table></figure>
+
+<p>use helm push to save helm chart package to registry.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HELM_EXPERIMENTAL_OCI=1</span><br><span class="line">helm push mysql-8.8.25.tgz oci://localhost:5000/helm-charts</span><br></pre></td></tr></table></figure>
+
+<h4 id="Use-sealer-build-to-save-helm-chart-package-from-local-registry-to-cloud-image"><a href="#Use-sealer-build-to-save-helm-chart-package-from-local-registry-to-cloud-image" class="headerlink" title="Use sealer build to save helm chart package from local registry to cloud image."></a>Use sealer build to save helm chart package from local registry to cloud image.</h4><p>Prepare Kubefile:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@iZbp16ikro46xwgqzij67sZ build]# cat Kubefile</span><br><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY imageList manifests</span><br></pre></td></tr></table></figure>
+
+<p>Prepare imageList file:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@iZbp16ikro46xwgqzij67sZ build]# cat imageList</span><br><span class="line">localhost:5000/helm-charts/mysql:8.8.25</span><br><span class="line">localhost:5000/helm-charts/nginx:9.8.0</span><br></pre></td></tr></table></figure>
+
+<p>Then run <code>sealer build -t my-kubernetes:v1.19.8 -f Kubefile .</code>and we can<br>use <code>sealer save my-kubernetes:v1.19.8 -o my-kubernetes.tar</code> to save the image to the local filesystem.</p>
+<h3 id="On-the-run-node"><a href="#On-the-run-node" class="headerlink" title="On the run node."></a>On the run node.</h3><p>load the image <code>my-kubernetes.tar</code> from the build node use <code>sealer load -i my-kubernetes.tar</code>.</p>
+<h4 id="Use-sealer-run-to-start-the-cluster"><a href="#Use-sealer-run-to-start-the-cluster" class="headerlink" title="Use sealer run to start the cluster"></a>Use sealer run to start the cluster</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer run -d my-kubernetes:v1.19.8 -p password -m 172.16.0.230</span><br></pre></td></tr></table></figure>
+
+<h4 id="Pull-Helm-chart-on-the-run-node"><a href="#Pull-Helm-chart-on-the-run-node" class="headerlink" title="Pull Helm chart on the run node."></a>Pull Helm chart on the run node.</h4><p>When the cluster is up, we can pull the helm chart package use helm pull:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HELM_EXPERIMENTAL_OCI=1</span><br><span class="line">helm pull oci://sea.hub:5000/helm-charts/mysql --version 8.8.25</span><br></pre></td></tr></table></figure>
+
+<h2 id="Save-ACR-chart"><a href="#Save-ACR-chart" class="headerlink" title="Save ACR chart"></a>Save ACR chart</h2><p>Example to pull <code>chart-registry.cn-shanghai.cr.aliyuncs.com/aliyun-inc.com/elasticsearch:1.0.1-elasticsearch.elasticsearch</code> chart.</p>
+<ol>
+<li>Login your ACR registry</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sealer login sealer login chart-registry.cn-shanghai.cr.aliyuncs.com \</span><br><span class="line">   --username cnx-platform@prod.trusteeship.aliyunid.com --passwd xxx</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Create Kubefile and imageList</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2zeasfsez3jrior15rpbZ chart]# cat imageList</span><br><span class="line">chart-registry.cn-shanghai.cr.aliyuncs.com/aliyun-inc.com/elasticsearch:1.0.1-elasticsearch.elasticsearch</span><br><span class="line">[root@iZ2zeasfsez3jrior15rpbZ chart]# cat Kubefile</span><br><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY imageList manifests</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Build CloudImage and save ACR remote chart to local registry</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t chart:latest .</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Run a cluster</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer run chart:latest -m x.x.x.x -p xxx</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Try to pull chart using helm from local registry</li>
+</ol>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2zeasfsez3jrior15rpbZ certs]# helm pull oci://sea.hub:5000/aliyun-inc.com/elasticsearch --version 1.0.1-elasticsearch.elasticsearch</span><br><span class="line">Warning: chart media type application/tar+gzip is deprecated</span><br><span class="line">Pulled: sea.hub:5000/aliyun-inc.com/elasticsearch:1.0.1-elasticsearch.elasticsearch</span><br><span class="line">Digest: sha256:c247fd56b985cfa4ad58c8697dc867a69ee1861a1a625b96a7b9d78ed5d9df95</span><br><span class="line">[root@iZ2zeasfsez3jrior15rpbZ certs]# ls</span><br><span class="line">elasticsearch-1.0.1-elasticsearch.elasticsearch.tgz</span><br></pre></td></tr></table></figure>
+
+<p>If you got <code>Error: failed to do request: Head &quot;https://sea.hub:5000/v2/aliyun-inc.com/elasticsearch/manifests/1.0.1-elasticsearch.elasticsearch&quot;: x509: certificate signed by unknown authority </code> error, trust registry cert on your host:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /var/lib/sealer/data/my-cluster/certs/sea.hub.crt /etc/pki/ca-trust/source/anchors/ &amp;&amp; update-ca-trust extract</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/18/zh/advanced/save-charts-package/" data-id="cl1fryzy7000c26e2fkirffc5" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/18/zh/getting-started/introduction/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/02/zh/advanced/define-cloudrootfs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/01/blog/">blog</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/29/zh/getting-started/plugin/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/zh/getting-started/quick-start/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/zh/getting-started/introduction/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

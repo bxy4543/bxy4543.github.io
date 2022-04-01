@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Define your own CloudRootfsAll the files which run a kubernetes cluster needs. Contains:  Bin files, like docker, containerd, crictl ,kubeadm, kubectl… Config files, like kubelet systemd config, docke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/03/02/zh/advanced/define-cloudrootfs/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Define your own CloudRootfsAll the files which run a kubernetes cluster needs. Contains:  Bin files, like docker, containerd, crictl ,kubeadm, kubectl… Config files, like kubelet systemd config, docke">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-02T06:55:10.753Z">
+<meta property="article:modified_time" content="2022-03-02T06:55:10.753Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-zh/advanced/define-cloudrootfs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/02/zh/advanced/define-cloudrootfs/" class="article-date">
+  <time class="dt-published" datetime="2022-03-02T06:55:10.753Z" itemprop="datePublished">2022-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Define-your-own-CloudRootfs"><a href="#Define-your-own-CloudRootfs" class="headerlink" title="Define your own CloudRootfs"></a>Define your own CloudRootfs</h1><p>All the files which run a kubernetes cluster needs.</p>
+<p>Contains:</p>
+<ul>
+<li>Bin files, like docker, containerd, crictl ,kubeadm, kubectl…</li>
+<li>Config files, like kubelet systemd config, docker systemd config, docker daemon.json…</li>
+<li>Registry docker image.</li>
+<li>Some Metadata, like Kubernetes version.</li>
+<li>Registry files, contains all the docker image, like kubernetes core component docker images…</li>
+<li>Scripts, some shell script using to install docker and kubelet… sealer will call init.sh and clean.sh.</li>
+<li>Other static files</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├──</span> <span class="string">bin</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">conntrack</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-rootless-setuptool.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-rootless.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">crictl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubeadm</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubectl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubelet</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">nerdctl</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">seautil</span></span><br><span class="line"><span class="string">├──</span> <span class="string">cri</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-shim</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">containerd-shim-runc-v2</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">ctr</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">dockerd</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker-init</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker-proxy</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">rootlesskit</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">rootlesskit-docker-proxy</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">runc</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">vpnkit</span></span><br><span class="line"><span class="string">├──</span> <span class="string">etc</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="number">10</span><span class="string">-kubeadm.conf</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">Clusterfile</span>  <span class="comment"># image default Clusterfile</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">daemon.json</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker.service</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">kubeadm-config.yaml</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">kubelet.service</span></span><br><span class="line"><span class="string">├──</span> <span class="string">images</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">registry.tar</span>  <span class="comment"># registry docker image, will load this image and run a local registry in cluster</span></span><br><span class="line"><span class="string">├──</span> <span class="string">Kubefile</span></span><br><span class="line"><span class="string">├──</span> <span class="string">Metadata</span></span><br><span class="line"><span class="string">├──</span> <span class="string">README.md</span></span><br><span class="line"><span class="string">├──</span> <span class="string">registry</span> <span class="comment"># will mount this dir to local registry</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">docker</span></span><br><span class="line"><span class="string">│</span>       <span class="string">└──</span> <span class="string">registry</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">clean.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">docker.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init-kube.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init-registry.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">├──</span> <span class="string">init.sh</span></span><br><span class="line"><span class="string">│</span>   <span class="string">└──</span> <span class="string">kubelet-pre-start.sh</span></span><br><span class="line"><span class="string">└──</span> <span class="string">statics</span> <span class="comment"># yaml files, sealer will render values in those files</span></span><br><span class="line">    <span class="string">└──</span> <span class="string">audit-policy.yml</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="How-can-I-get-CloudRootfs"><a href="#How-can-I-get-CloudRootfs" class="headerlink" title="How can I get CloudRootfs"></a>How can I get CloudRootfs</h2><ol>
+<li>Pull a BaseImage <code>sealer pull kubernetes:v1.19.8-alpine</code></li>
+<li>View the image layer information <code>sealer inspect kubernetes:v1.19.8-alpine</code></li>
+<li>Get into the BaseImage Layer <code>ls /var/lib/sealer/data/overlay2/&#123;layer-id&#125;</code></li>
+</ol>
+<p>You will find the CloudRootfs layer.</p>
+<h2 id="Build-your-own-BaseImage"><a href="#Build-your-own-BaseImage" class="headerlink" title="Build your own BaseImage"></a>Build your own BaseImage</h2><p>You can edit any files in CloudRootfs you want, for example you want to define your own docker daemon.json, just edit it and build a new CloudImage.</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM scratch</span><br><span class="line">COPY . .</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t user-defined-kubernetes:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+<p>Then you can use this image as a BaseImage.</p>
+<h2 id="OverWrite-CloudRootfs-files"><a href="#OverWrite-CloudRootfs-files" class="headerlink" title="OverWrite CloudRootfs files"></a>OverWrite CloudRootfs files</h2><p>Sometimes you don’t want to care about the CloudRootfs context, but need custom some config.</p>
+<p>You can use <code>kubernetes:v1.19.8</code> as BaseImage, and use your own config file to overwrite the default file in CloudRootfs.</p>
+<p>For example: daemon.json is your docker engine config, using it to overwrite default config:</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM kubernetes:v1.19.8</span><br><span class="line">COPY daemon.json etc/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -t user-defined-kubernetes:v1.19.8 .</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/02/zh/advanced/define-cloudrootfs/" data-id="cl1fryzy1000726e2hdoeej0c" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/18/zh/advanced/save-charts-package/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/02/zh/reference/cloudrootfs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/01/blog/">blog</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/29/zh/getting-started/plugin/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/zh/getting-started/quick-start/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/zh/getting-started/introduction/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

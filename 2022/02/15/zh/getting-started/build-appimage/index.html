@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Build application imageMotivationsApplications image contains applications with all dependencies except the base image, so applications image can installto an already existing Kubernetes cluster. with">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/02/15/zh/getting-started/build-appimage/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Build application imageMotivationsApplications image contains applications with all dependencies except the base image, so applications image can installto an already existing Kubernetes cluster. with">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-15T02:17:58.621Z">
+<meta property="article:modified_time" content="2022-02-15T02:17:58.621Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-zh/getting-started/build-appimage" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/15/zh/getting-started/build-appimage/" class="article-date">
+  <time class="dt-published" datetime="2022-02-15T02:17:58.621Z" itemprop="datePublished">2022-02-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Build-application-image"><a href="#Build-application-image" class="headerlink" title="Build application image"></a>Build application image</h1><h2 id="Motivations"><a href="#Motivations" class="headerlink" title="Motivations"></a>Motivations</h2><p>Applications image contains applications with all dependencies except the base image, so applications image can install<br>to an already existing Kubernetes cluster. with applications image, cluster can be incremental updating, and we can<br>install applications to an already existing Kubernetes cluster.</p>
+<h2 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h2><h3 id="Build-an-application-image"><a href="#Build-an-application-image" class="headerlink" title="Build an application image"></a>Build an application image</h3><p>just add argument “–base&#x3D;false”, will build an application image. and the size of application image depends on the<br>docker image size in most cases. without rootfs,it will become slimmer.</p>
+<p>For example to build a prometheus application image:<br>Kubefile:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM registry.cn-qingdao.aliyuncs.com/sealer-apps/openebs-localpv:2.11.0</span><br><span class="line">COPY prometheus manifests</span><br><span class="line">CMD kubectl apply -f prometheus/crd.yaml</span><br><span class="line">CMD kubectl apply -f prometheus/operator.yaml</span><br></pre></td></tr></table></figure>
+
+<p>build command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer build -f Kubefile -t prometheus:2.30.0 --base=false .</span><br></pre></td></tr></table></figure>
+
+<p>The image prometheus:2.30.0 will not contain the embedded Kubernetes cluster. and it only contains all the docker image<br>that application needs, and contains helm chart or other operator manifests.</p>
+<h3 id="Apply-this-application-image"><a href="#Apply-this-application-image" class="headerlink" title="Apply this application image"></a>Apply this application image</h3><p>We can only support sealer cluster currently. Sealer hacked docker and registry to cache docker image in cluster, so if<br>cluster not installed by sealer, this app image will install failed.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer run prometheus:2.30.0</span><br></pre></td></tr></table></figure>
+
+<p>Or using Clusterfile to overwrite the config files like helm values.</p>
+<h3 id="Merge-two-application-images"><a href="#Merge-two-application-images" class="headerlink" title="Merge two application images"></a>Merge two application images</h3><p>Using sealer merge ,we can combine the app image as one,in the meantime we can merge application images with cloud<br>images.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sealer merge mysql:8.0.26 redis:6.2.5 -t mysql-redis:latest</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/15/zh/getting-started/build-appimage/" data-id="cl1fryzya000g26e2f6d7hrkn" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/15/zh/getting-started/run-cluster/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/15/zh/contributing/contribute/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/01/blog/">blog</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/31/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/29/zh/getting-started/plugin/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/23/zh/getting-started/quick-start/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/18/zh/getting-started/introduction/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
